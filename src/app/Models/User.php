@@ -61,6 +61,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             return 'https://www.gravatar.com/avatar/' . $hash . '?d=mp&r=g&s=250';
         }
     }
+    
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class);
+    }
 
     public function canAccessPanel(Panel $panel): bool
     {

@@ -64,6 +64,11 @@ class AdminPanelProvider extends PanelProvider
                 //     ->label(fn () => auth()->user()->name)
                 //     ->icon('heroicon-m-user-circle'),
             ])
+            ->discoverResources(
+                in: app_path('Filament/Admin/Resources'),
+                for: 'App\\Filament\\Admin\\Resources'
+            )
+
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
                     ->gridColumns([
@@ -106,9 +111,11 @@ class AdminPanelProvider extends PanelProvider
                     ->shouldShowBrowserSessionsForm()
                     ->shouldShowAvatarForm(),
             ])
-            ->resources([
-                config('filament-logger.activity_resource'),
-            ])
+            // ->resources([
+            //     config('filament-logger.activity_resource'),
+            //     \App\Filament\Admin\Resources\PoliResource::class,
+            //     \App\Filament\Admin\Resources\JadwalResource::class,
+            // ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->middleware([
                 EncryptCookies::class,
@@ -122,6 +129,7 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
                 \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
             ])
+            
             ->authMiddleware([
                 Authenticate::class,
             ]);
